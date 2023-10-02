@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Container, Grid, Box } from '@mui/material';
-import './App.css'
+import './assets/App.css'
 import axios from "axios"
 import ButtonLoading from './components/ButtonLoading';
 import LoadDetailsVideo from './components/LoadDetailsVideo';
 import TittleInput from './components/TittleInput';
-import Alerts from './components/Alerts';
+
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
