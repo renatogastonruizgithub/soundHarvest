@@ -28,7 +28,7 @@ function App() {
   const handleDownlod = async () => {
     try {
       setGetDatailsVideo(true)
-      const response = await axios.post('http://localhost:8080/sendUrl', object)
+      const response = await axios.post('https://api-sound-harvest.vercel.app/sendUrl', object)
 
       if (response.status === 200) {
         setVisibleBtnDownload(true)
@@ -68,7 +68,7 @@ function App() {
 
     try {
       setLoadingDownload(true)
-      const response = await axios.get('http://localhost:8080/downloads', {
+      const response = await axios.get('https://api-sound-harvest.vercel.app/downloads', {
         responseType: 'blob', // Indicamos que esperamos una respuesta binaria (Blob)
       });
 
