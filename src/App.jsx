@@ -20,15 +20,17 @@ function App() {
   const [getDatailsVideo, setGetDatailsVideo] = useState(null);
   const [downloadAgain, setDownloadAgain] = useState(false);
 
-  let object = {
+  const object = {
     url: url
   }
 
+  const api = import.meta.env.VITE_APP_API;
+  const dev = import.meta.env.VITE_APP_DEV;
 
   const handleDownlod = async () => {
     try {
       setGetDatailsVideo(true)
-      const response = await axios.post('https://api-sound-harvest.vercel.app/sendUrl', object)
+      const response = await axios.post(api + "/sendUrl", object)
 
       if (response.status === 200) {
         setVisibleBtnDownload(true)
@@ -68,9 +70,10 @@ function App() {
 
     try {
       setLoadingDownload(true)
-      const response = await axios.get('https://api-sound-harvest.vercel.app/downloads', {
-        responseType: 'blob', // Indicamos que esperamos una respuesta binaria (Blob)
-      });
+      const response = await
+        axios.get(`${api}/downloads?videoUrl=${encodeURIComponent(url)}`, {
+          responseType: 'blob',
+        });
 
       if (response.status === 200) {
 
