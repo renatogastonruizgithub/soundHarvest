@@ -20,7 +20,7 @@ function App() {
   const [getDatailsVideo, setGetDatailsVideo] = useState(null);
   const [downloadAgain, setDownloadAgain] = useState(false);
 
-  const object = {
+  const dataUrl = {
     url: url
   }
 
@@ -30,7 +30,7 @@ function App() {
   const handleDownlod = async () => {
     try {
       setGetDatailsVideo(true)
-      const response = await axios.post(api + "/sendUrl", object)
+      const response = await axios.post(api + "/sendUrl", dataUrl)
 
       if (response.status === 200) {
         setVisibleBtnDownload(true)
@@ -70,10 +70,9 @@ function App() {
 
     try {
       setLoadingDownload(true)
-      const response = await
-        axios.get(`${api}/downloads?videoUrl=${encodeURIComponent(url)}`, {
-          responseType: 'blob',
-        });
+      const response = await axios.post(api + "/downloads", dataUrl, {
+        responseType: "blob"
+      });
 
       if (response.status === 200) {
 
