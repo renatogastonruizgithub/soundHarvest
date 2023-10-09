@@ -77,17 +77,16 @@ function App() {
       if (response.status === 200) {
 
         const blob = new Blob([response.data], { type: 'audio/mp3' });
-        const url = window.URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.style.display = 'none'
+        // Obtén la URL del archivo del objeto JSON de respuesta
+        const fileUrl = response.data.file;
+        a.href = fileUrl;
         a.download = `${data.nameFile}.mp3`;
         document.body.appendChild(a);
-
         // Hace clic en el enlace para iniciar la descarga
         a.click();
-
         // Limpia el objeto URL y el elemento a
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
