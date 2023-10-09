@@ -30,7 +30,7 @@ function App() {
   const handleDownlod = async () => {
     try {
       setGetDatailsVideo(true)
-      const response = await axios.post(api + "/sendUrl", dataUrl)
+      const response = await axios.post(dev + "/sendUrl", dataUrl)
 
       if (response.status === 200) {
         setVisibleBtnDownload(true)
@@ -70,7 +70,7 @@ function App() {
 
     try {
       setLoadingDownload(true)
-      const response = await axios.post(api + "/downloads", dataUrl, {
+      const response = await axios.post(dev + "/downloads", dataUrl, {
         responseType: "blob"
       });
 
@@ -81,8 +81,8 @@ function App() {
         const a = document.createElement('a')
         a.style.display = 'none'
         // Obtén la URL del archivo del objeto JSON de respuesta
-        const fileUrl = response.data.file;
-        a.href = fileUrl;
+
+        a.href = url;
         a.download = `${data.nameFile}.mp3`;
         document.body.appendChild(a);
         // Hace clic en el enlace para iniciar la descarga
