@@ -30,7 +30,7 @@ function App() {
   const handleDownlod = async () => {
     try {
       setGetDatailsVideo(true)
-      const response = await axios.post(dev + "/sendUrl", dataUrl)
+      const response = await axios.post(api + "/sendUrl", dataUrl)
 
       if (response.status === 200) {
         setVisibleBtnDownload(true)
@@ -70,7 +70,7 @@ function App() {
 
     try {
       setLoadingDownload(true)
-      const response = await axios.post(dev + "/downloads", dataUrl, {
+      const response = await axios.post(api + "/downloads", dataUrl, {
         responseType: "blob"
       });
 
