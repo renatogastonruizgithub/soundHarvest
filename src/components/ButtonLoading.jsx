@@ -3,18 +3,20 @@ import React from 'react'
 import ReplayIcon from '@mui/icons-material/Replay';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
+import WestIcon from '@mui/icons-material/West';
 const ButtonLoading = ({ nameIcon, variant, icon, textButton, loading, textLoading, onClick }) => {
-    const IconComponent = nameIcon === 'retry' ? ReplayIcon : nameIcon === 'arrow' ? ArrowDownwardIcon : CheckCircleIcon;
-
-
+    const IconComponent =
+        nameIcon === 'retry' ? ReplayIcon :
+            nameIcon === 'arrow' ? ArrowDownwardIcon :
+                nameIcon === 'west' ? WestIcon :
+                    CheckCircleIcon;
     return (
 
         <LoadingButton
             sx={{ marginTop: "2rem" }}
             className='button'
             type="submit"
-            endIcon={icon ? <IconComponent /> : null}
+            startIcon={icon ? <IconComponent /> : null}
             loading={loading}
             loadingPosition={icon ? "end" : undefined}
             variant={variant}

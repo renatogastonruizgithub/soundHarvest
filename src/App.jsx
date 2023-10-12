@@ -5,7 +5,7 @@ import axios from "axios"
 import ButtonLoading from './components/ButtonLoading';
 import LoadDetailsVideo from './components/LoadDetailsVideo';
 import TittleInput from './components/TittleInput';
-
+/* import { useHistory } from "react-router-dom" */
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [url, setUrl] = useState("")
   const [visibleBtnDownload, setVisibleBtnDownload] = useState(false)
-  const [visibleBtnSendUrl, setVisibleBtnSendUrl] = useState(true)
+  const [visibleBtnSendUrl, setVisibleBtnSendUrl] = useState()
   const [data, setData] = useState({ nameFile: "", image: "" })
   const [loadingDownload, setLoadingDownload] = useState();
   const [getDatailsVideo, setGetDatailsVideo] = useState(null);
@@ -41,7 +41,6 @@ function App() {
 
       else {
         toast.error("¡Ups!, link de YouTube incorrecto", {
-          position: toast.POSITION.TOP_CENTER,
           autoClose: 4000,
         });
 
@@ -54,7 +53,6 @@ function App() {
 
     } catch (error) {
       toast.error("¡Ups!, link de YouTube incorrecto", {
-        position: toast.POSITION.TOP_CENTER,
         autoClose: 4000,
       });
 
@@ -94,7 +92,6 @@ function App() {
       }
       else {
         toast.error("¡Ups!,lo siento no se pudo descargar", {
-          position: toast.POSITION.TOP_CENTER,
           autoClose: 4000,
         });
 
@@ -106,7 +103,6 @@ function App() {
 
     } catch (error) {
       toast.error("¡Ups!,lo siento no se pudo descargar", {
-        position: toast.POSITION.TOP_CENTER,
         autoClose: 4000,
       });
 
@@ -119,7 +115,6 @@ function App() {
       setLoadingDownload(false)
       setDownloadAgain(true)
       toast.success("¡Ya se descargo!,ve a la carpeta de descargas", {
-        position: toast.POSITION.TOP_CENTER,
         autoClose: 4000,
       });
     }
@@ -134,85 +129,110 @@ function App() {
     setLoadingDownload(null)
     setDownloadAgain(false)
   }
+  /*  const router = useHistory() router.push("/");*/
+  function returnHome() {
+    window.location.reload();
+  }
+
   useEffect(() => {
   }, [data])
 
   return (
+    <Box sx={{ height: "100vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
 
-    <Container maxWidth="sm" >
-      <Grid container>
-        <Grid item xs={12} md={12} lg={12}>
-          <div>
-            <h1 className='tittleApp'>SonudHarvest Mp3</h1>
-          </div>
+      <Container maxWidth="sm" >
+        <Grid container>
+          <Grid item xs={12} md={12} lg={12}>
+            <div>
+              <h1 className='tittleApp'>SonudHarvest Mp3</h1>
+            </div>
 
-          <div className="card">
+            <div className="card">
 
 
-            <TittleInput
-              eventHandle={getDatailsVideo}
-              titleText={"Pega el link del video de youtube"}
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-
-            <LoadDetailsVideo
-              eventHandle={getDatailsVideo}
-              text={data.nameFile}
-              srcImage={data.image}
-            />
-            <Box sx={{ position: "relative !important" }}>
-              <ToastContainer />
-
-            </Box>
-
-            {
-              visibleBtnSendUrl &&
-              <ButtonLoading
-                icon={true}
-                loading={getDatailsVideo}
-                variant={"contained"}
-                onClick={handleDownlod}
-                textButton={"Verificar link"}
-                textLoading={"Cargando datos del video"}
+              <TittleInput
+                eventHandle={getDatailsVideo}
+                titleText={"Pega el link del video de youtube"}
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
               />
-            }
 
-
-            {
-              visibleBtnDownload &&
-
-              <ButtonLoading
-                icon={true}
-                loading={loadingDownload}
-                nameIcon={"arrow"}
-                onClick={getDownlod}
-                textButton={downloadAgain ? "Descargar de nuevo" : "Descargar"}
-                textLoading={"Convirtiendo a mp3"}
-                variant={downloadAgain ? "outline" : "contained"}
-
+              <LoadDetailsVideo
+                eventHandle={getDatailsVideo}
+                text={data.nameFile}
+                srcImage={data.image}
               />
-            }
-            {
-              downloadAgain ? <ButtonLoading
-                icon={true}
-                nameIcon={"retry"}
-                loading={false}
-                textButton={"Descargar otro"}
-                variant={"contained"}
-                onClick={againDownload}
-              /> : null
 
-            }
+              <Box sx={{ position: "relative !important" }}>
+                <ToastContainer
+                  position={window.innerWidth < 768 ? "bottom-center" : "top-center"}
+                />
+
+              </Box>
+
+              {
+                getDatailsVideo === null ?
+                  <ButtonLoading
+                    icon={true}
+                    loading={false}
+                    variant={"contained"}
+                    onClick={handleDownlod}
+                    textButton={"Verificar link"}
+
+                  />
+                  : (
+                    " "
+                  )
+              }
+
+
+              {
+                visibleBtnDownload &&
+                <>
+
+                  <ButtonLoading
+                    icon={true}
+                    loading={loadingDownload}
+                    nameIcon={"arrow"}
+                    onClick={getDownlod}
+                    textButton={downloadAgain ? "Descargar de nuevo" : "Descargar"}
+                    textLoading={"Convirtiendo a mp3"}
+                    variant={downloadAgain ? "outline" : "contained"}
+                  />
+                  {
+                    downloadAgain ? " " : <ButtonLoading
+                      icon={true}
+                      loading={false}
+                      nameIcon={"west"}
+                      onClick={returnHome}
+                      textButton={"Volver"}
+                      variant={"outline"}
+                    />
+                  }
+
+                </>
+
+              }
+              {
+                downloadAgain ? <ButtonLoading
+                  icon={true}
+                  nameIcon={"retry"}
+                  loading={false}
+                  textButton={"Descargar otro"}
+                  variant={"contained"}
+                  onClick={againDownload}
+                /> : null
+
+              }
 
 
 
-          </div>
-        </Grid>
-      </Grid >
+            </div>
+          </Grid>
+        </Grid >
 
-    </Container >
-
+      </Container >
+    </Box >
   )
 }
 

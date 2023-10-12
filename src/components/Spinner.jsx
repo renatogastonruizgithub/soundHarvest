@@ -8,9 +8,8 @@ const Spinner = ({ title }) => {
                 position: "absolute",
                 top: "-3%",
                 left: "0",
-                display: "grid",
-                placeItems: "center",
-                backgroundColor: "rgb(240, 242, 245)",
+                display: "flex",
+                flexDirection: "column",
                 width: "100%",
                 height: "100%",
                 zIndex: 1000
@@ -27,9 +26,11 @@ const Spinner = ({ title }) => {
                         <span></span>
                         <span></span>
                     </div>
+
                 </Stack>
 
             </Box>
+            <p style={{ marginTop: "2rem" }}>Cargando datos del video</p>
         </Box>
     )
 }
