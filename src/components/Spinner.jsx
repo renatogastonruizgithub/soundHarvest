@@ -18,7 +18,7 @@ const Spinner = ({ title }) => {
                     display: "grid",
                     placeItems: "center",
                 }}>
-                    <span>{title}</span>
+
                     <div className="loading">
                         <span></span>
                         <span></span>
@@ -30,7 +30,7 @@ const Spinner = ({ title }) => {
                 </Stack>
 
             </Box>
-            <p style={{ marginTop: "2rem" }}>Cargando datos del video</p>
+            <p style={{ marginTop: "2rem" }}>{title}</p>
         </Box>
     )
 }

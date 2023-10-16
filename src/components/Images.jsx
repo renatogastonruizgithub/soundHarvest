@@ -27,7 +27,7 @@ const Images = ({ url, alt = "", height, objectFit = "cover" || "contain" }) => 
             {
                 isLoaded ?
 
-                    (<img src={url} alt={alt} style={{ width: "100%", height: height, objectFit: objectFit }} />)
+                    (<img src={url} alt={alt} style={{ width: "100%", height: height, objectFit: objectFit, borderRadius: "17px" }} />)
                     :
                     (<Skeleton variant="rectangular" height={height} sx={{ width: "100%" }} />)
             }

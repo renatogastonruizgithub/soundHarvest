@@ -13,14 +13,15 @@ const ButtonLoading = ({ nameIcon, variant, icon, textButton, loading, textLoadi
     return (
 
         <LoadingButton
-            sx={{ marginTop: "2rem" }}
-            className='button'
+            sx={{ color: "#242424", textTransform: "capitalize", fontSize: ".9rem" }}
+            /*   className='button' */
             type="submit"
             startIcon={icon ? <IconComponent /> : null}
             loading={loading}
-            loadingPosition={icon ? "end" : undefined}
+            /*   loadingPosition={icon ? "end" : undefined} */
             variant={variant}
             onClick={onClick}
+            size='small'
         >
             {
                 loading ?

@@ -20,6 +20,10 @@ body {
   margin: 0;
 }
 
+p {
+  color: #242424;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -45,15 +49,14 @@ h1 {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s !important;
-  margin-top: 2rem;
-  color: #f9f9f9 !important;
+
 }
 
 /* boton mui */
-.css-17so2oc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root {
+/* .css-17so2oc-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root {
   background-color: #1a1a1a !important;
 }
-
+ */
 .button:hover {
   border-color: #646cff !important;
 
@@ -83,7 +86,7 @@ h1 {
   color: #242424;
 }
 
-
+/* 
 .Mui-focused,
 .MuiFilledInput-input {
   color: rgb(161, 161, 161) !important;
@@ -104,4 +107,28 @@ h1 {
   border-color: #646cff !important;
   color: #1a1a1a !important;
 
+} */
+
+#MyInput,
+input[type="text"] {
+  width: 90%;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: 0.3s;
+  background: #e0e0e0;
+  box-shadow: 20px 20px 60px #c1c1c1,
+    -20px -20px 60px #ffffff;
+  color: #1a1a1a;
+}
+
+#MyInput:focus,
+input[type="text"]:focus {
+  outline-offset: 0px;
+  outline-color: #747bff !important;
+  border: 1px solid #747bff;
+  background: #e8e8e8;
+  box-shadow: inset 20px 20px 60px #c5c5c5,
+    inset -20px -20px 60px #ffffff;
+  transition: 0.3s;
 }
