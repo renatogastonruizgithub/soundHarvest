@@ -1,12 +1,13 @@
-/* import { TextField } from '@mui/material' */
+
 import React, { useState } from 'react'
-import ButtonLoading from './ButtonLoading';
 import axios from "axios"
 import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { setLoading, setResult } from '../features/globalState/globalState';
+import { setLoading, setResult, setUrl } from '../features/globalState/globalState';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "../assets/index.css"
+
 
 function TittleInput() {
   const dispatch = useDispatch()
@@ -16,12 +17,14 @@ function TittleInput() {
   const api = import.meta.env.VITE_APP_API;
 
 
-  const detectedPaste = (event) => {
+  const detectedPaste = async (event) => {
     event.preventDefault()
+
     const pastedText = event.clipboardData.getData('text')
     if (pastedText) {
       const updatedValue = inputValue + pastedText
       setInputValue(updatedValue)
+      dispatch(setUrl(updatedValue)) //envio la url para poder descargar
       if (delayTimer.current) {
         clearTimeout(delayTimer.current)
       }
@@ -52,7 +55,7 @@ function TittleInput() {
       const response = await axios.post(api + "/search", { query })
       dispatch(setResult(response.data))
       dispatch(setLoading(false))
-
+      setInputValue("")
     } catch (error) {
       toast.error("¡Ups!, no encontrado", {
         autoClose: 4000,
@@ -71,6 +74,7 @@ function TittleInput() {
       if (response.status === 200) {
         dispatch(setResult([response.data]))
         dispatch(setLoading(false))
+        setInputValue("")
       }
       else {
         toast.error("¡Ups!, link de YouTube incorrecto", {
@@ -78,6 +82,7 @@ function TittleInput() {
         });
         dispatch(setLoading(false))
         dispatch(setResult([]))
+        setInputValue("")
       }
 
 

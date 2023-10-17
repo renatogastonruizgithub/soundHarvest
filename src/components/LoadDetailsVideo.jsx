@@ -1,89 +1,64 @@
 import React from 'react'
-import Images from './Images'
+import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner'
 import { Container, Stack, Grid } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import CardSound from './CardSound'
 import ButtonLoading from './ButtonLoading'
-import YoutubePlayer from './YoutubePlayer'
+import { chooseDownload } from '../features/globalState/globalState';
+
 
 const LoadDetailsVideo = () => {
     const { data, isLoading } = useSelector((state) => state.global)
+    const dispatch = useDispatch()
+    const router = useNavigate();
+
+    function goto(url) {
+
+        console.log(url)
+        dispatch(chooseDownload(url))
+        router("/descargas")
+    }
 
     return (
-        <>
+        <Container maxWidth="md">
             {data.length > 0 ?
-                (<p>{data.length + " resultados encontrados"}</p>) : null
+                (<p className='span'>{data.length + " resultados encontrados"}</p>) : null
             }
-            <Container maxWidth="lg" sx={{ marginTop: "2rem" }} >
+            <>
                 {
                     isLoading ?
                         <Spinner title="Buscando" />
                         :
 
                         (
-
-                            <Grid container spacing={8}>
-
+                            <Grid container spacing={8} >
                                 {data.map((video, index) => (
-
                                     <Grid item xs={12} sm={6} md={4} lg={4}>
-
-                                        <div className='card' key={index}>
-                                            <div className='cardBody'>
-                                                <Stack
-                                                    direction="row"
-                                                    sx={{ flexDirection: { xs: "column", md: "column" } }}
-                                                >
-
-
-                                                    <Images url={video.thumbnail} alt='imagen' height="100%" objectFit='contain' />
-                                                    <p> {video.title}</p>
-
-                                                    <YoutubePlayer url={video.url} title={video.title} />
-                                                </Stack>
-                                            </div>
-
-                                            <div className='cardActions'>
-                                                <Stack direction="row"
-                                                    sx={{
-                                                        flexDirection: {
-                                                            xs: "row",
-                                                        },
-                                                        justifyContent: "space-between",
-                                                        alignItems: "center"
-                                                    }}>
-                                                    <ButtonLoading
-                                                        icon={true}
-                                                        nameIcon={"arrow"}
-
-                                                        textButton={"Reproducir"}
-
-                                                        variant={"outlined"}
-                                                    />
-                                                    <ButtonLoading
-                                                        icon={true}
-                                                        nameIcon={"arrow"}
-
-                                                        textButton={"Descargar"}
-
-                                                        variant={"contained"}
-                                                    />
-                                                </Stack>
-                                            </div>
-                                        </div>
-                                    </Grid >
-
+                                        <CardSound
+                                            url={video.url}
+                                            thumbnail={video.thumbnail}
+                                            title={video.title}
+                                            buttonActions={
+                                                <ButtonLoading
+                                                    nameIcon="arrow"
+                                                    icon={true}
+                                                    textButton="Descargar"
+                                                    variant="contained"
+                                                    onClick={() => goto(video.url)}
+                                                />}
+                                        />
+                                    </Grid>
                                 ))}
                             </Grid>
-
 
                         )
                 }
 
 
 
-            </Container >
-        </>
+            </ >
+        </Container >
     )
 }
 

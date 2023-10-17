@@ -1,6 +1,4 @@
 .card {
-  /*
-   background-color: rgb(82, 82, 82); */
   display: flex;
   flex-direction: column;
   justify-content: center;

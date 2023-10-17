@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/material';
 import "../assets/spinner.css"
 const Spinner = ({ title }) => {
     return (
-        <Box sx={{ position: "relative", margin: ".9rem 0" }}>
+        <Box sx={{ position: "relative", margin: ".9rem 0", display: "flex", justifyContent: "center" }}>
             <Box sx={{
                 position: "absolute",
                 top: "-3%",
@@ -30,7 +30,7 @@ const Spinner = ({ title }) => {
                 </Stack>
 
             </Box>
-            <p style={{ marginTop: "2rem" }}>{title}</p>
+            <p style={{ marginTop: "2.5rem", color: "#a8a8a8", fontSize: ".9rem" }}>{title}</p>
         </Box>
     )
 }
