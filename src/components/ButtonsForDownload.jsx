@@ -9,7 +9,7 @@ import ButtonLoading from './ButtonLoading';
 
 const ButtonsForDownload = ({ title, videoUrl }) => {
     const dispatch = useDispatch()
-    const { url } = useSelector((state) => state.global)
+    const { url, isAudioDownload, isVideoDownload } = useSelector((state) => state.global)
     const api = import.meta.env.VITE_APP_API;
 
     const dataUrl = videoUrl ? { url: videoUrl } : { url: url };
@@ -96,14 +96,14 @@ const ButtonsForDownload = ({ title, videoUrl }) => {
                     nameIcon="arrow"
                     onClick={getAudio}
                     textButton="Audio"
-                    variant="contained"
+                    variant={isAudioDownload ? "outlined" : "contained"}
                 />
                 <ButtonLoading
                     icon={true}
                     nameIcon="arrow"
                     onClick={getVideo}
                     textButton="Video"
-                    variant="contained"
+                    variant={isVideoDownload ? "outlined" : "contained"}
                 />
             </Stack>
         </>

@@ -11,7 +11,7 @@ function SearchVideos() {
                     <Grid item xs={12} md={12} lg={12} >
                         <Box>
                             <div style={{ marginBottom: "2rem" }}>
-                                <h1 className='tittleApp'>Elijte tus canciones</h1>
+                                <h1 className='tittleApp'>Busque su video o música favorita</h1>
                             </div>
                             <TittleInput></TittleInput>
                         </Box>

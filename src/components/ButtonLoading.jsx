@@ -15,7 +15,7 @@ const ButtonLoading = ({ nameIcon, variant, icon, textButton, loading, textLoadi
     return (
 
         <LoadingButton
-            sx={{ color: "#fff", borderRadius: "17px", backgroundColor: "#242424", textTransform: "capitalize", fontSize: ".9rem" }}
+            sx={{ textTransform: "capitalize", fontSize: "1rem" }}
             /*   className='button' */
             type="submit"
             startIcon={icon ? <IconComponent /> : null}
@@ -23,7 +23,7 @@ const ButtonLoading = ({ nameIcon, variant, icon, textButton, loading, textLoadi
             /*   loadingPosition={icon ? "end" : undefined} */
             variant={variant}
             onClick={onClick}
-            size='small'
+            size='medium'
         >
             {
                 loading ?

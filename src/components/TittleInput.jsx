@@ -104,7 +104,7 @@ function TittleInput() {
         value={inputValue}
         id='MyInput'
         className="MyInput"
-        placeholder="Pega el link de youtube o busca el video"
+        placeholder="Pegue el link de youtube o busque el video"
         onInput={handleSearch}
         onPaste={detectedPaste}
       />

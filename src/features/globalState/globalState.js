@@ -10,6 +10,7 @@ export const globalState = createSlice({
         url: "",
         isAudioDownload: false,
         isVideoDownload: false,
+        dataChoose: [],
     },
     reducers: {
         setUrl: (state, action) => {
@@ -20,6 +21,9 @@ export const globalState = createSlice({
         },
         clearData: (state, action) => {
             state.data = []
+            state.dataChoose = []
+            state.isAudioDownload = false
+            state.isVideoDownload = false
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload
@@ -28,7 +32,8 @@ export const globalState = createSlice({
             state.data = action.payload
         },
         chooseDownload: (state, action) => {
-            state.data = state.data.filter((data) => data.url === action.payload)
+            state.dataChoose = state.data.filter((data) => data.url === action.payload)
+
         },
         setAudioDownload: (state, action) => {
             state.isAudioDownload = action.payload

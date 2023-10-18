@@ -1,6 +1,6 @@
 import React from 'react'
 import LoadDetailsVideo from '../components/LoadDetailsVideo'
-import { Box, Container, Grid } from "@mui/material"
+import { Box, Button, Container, Grid } from "@mui/material"
 import { useDispatch, useSelector } from 'react-redux'
 import CardSound from '../components/CardSound'
 import ButtonsForDownload from '../components/ButtonsForDownload'
@@ -10,19 +10,21 @@ import ButtonLoading from '../components/ButtonLoading'
 import { useNavigate } from 'react-router-dom';
 import { clearData } from '../features/globalState/globalState'
 const Downloads = () => {
-    const { data, isLoading, isAudioDownload, isVideoDownload } = useSelector((state) => state.global)
+    const { dataChoose, isLoading, isAudioDownload, isVideoDownload } = useSelector((state) => state.global)
     const router = useNavigate();
     const dispatch = useDispatch()
     function goTo() {
         dispatch(clearData())
+
+
         router("/busquedas")
 
     }
 
-    /*  function back() {
- 
-         router("/busquedas")
-     } */
+    function back() {
+
+        router("/busquedas")
+    }
 
     return (
         <Box sx={{ paddingBottom: "2rem" }}>
@@ -31,7 +33,7 @@ const Downloads = () => {
                     <Grid item xs={12} md={12} lg={12} >
                         <Box>
                             <div style={{ marginBottom: "2rem" }}>
-                                <h1 className='tittleApp'>Descarga tu cancion</h1>
+                                <h1 className='tittleApp'>Elije que quieres descargar</h1>
                             </div>
 
                         </Box>
@@ -46,7 +48,7 @@ const Downloads = () => {
 
                         <Grid container spacing={8} sx={{ display: "grid", placeItems: "center" }} >
 
-                            {data.map((video, index) => (
+                            {dataChoose.map((video, index) => (
                                 <Grid item xs={12} sm={5} md={5} lg={5}>
 
                                     {isAudioDownload || isVideoDownload ?
@@ -58,14 +60,19 @@ const Downloads = () => {
                                             onClick={goTo}
                                         />
                                         :
-                                        (null
-                                            /*  <ButtonLoading
-                                                 textButton="Volver"
-                                                 icon={true}
-                                                 nameIcon="west"
-                                                 variant="outline"
-                                                 onClick={back}
-                                             /> */
+                                        (
+                                            <div style={{ marginBottom: "2rem" }}>
+                                                <ButtonLoading
+                                                    textButton="Volver"
+                                                    icon={true}
+                                                    nameIcon="west"
+                                                    variant="outlined"
+                                                    onClick={back}
+                                                />
+                                            </div>
+
+
+
                                         )
                                     }
 
