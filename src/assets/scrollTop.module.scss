@@ -1,0 +1,33 @@
+$tam: 40px;
+
+
+.containerTop {
+    position: fixed;
+    width: $tam;
+    height: $tam;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    display: grid;
+    place-items: center;
+    right: 3%;
+    top: 90vh;
+    z-index: 1000;
+    animation-name: fadeInOpacity;
+    animation-duration: .1s;
+    cursor: pointer;
+
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
