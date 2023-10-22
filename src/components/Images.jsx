@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 
 const Images = ({ url, alt = "", height, objectFit = "cover" || "contain" }) => {
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(true);
 
     useEffect(() => {
         const image = new Image();

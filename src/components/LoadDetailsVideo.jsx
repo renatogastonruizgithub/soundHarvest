@@ -9,7 +9,7 @@ import { chooseDownload } from '../features/globalState/globalState';
 
 
 const LoadDetailsVideo = () => {
-    const { data, isLoading } = useSelector((state) => state.global)
+    const { input, data, isLoading, url } = useSelector((state) => state.global)
     const dispatch = useDispatch()
     const router = useNavigate();
 
@@ -22,37 +22,76 @@ const LoadDetailsVideo = () => {
 
     return (
         <Container maxWidth="md">
-            {data.length > 0 ?
-                (<p className='span'>{data.length + " resultados encontrados"}</p>) : null
+            {!isLoading &&
+                !url &&
+
+                data.length > 0 ?
+                (
+                    <p className='span'>
+                        {data.length + " resultados encontrados para " + input}
+                    </p>
+                ) : null
             }
             <>
                 {
                     isLoading ?
                         <Spinner title="Buscando" />
                         :
+                        url ?
+                            (<>
 
-                        (
-                            <Grid container spacing={8} >
-                                {data.map((video, index) => (
-                                    <Grid item xs={12} sm={6} md={4} lg={4}>
-                                        <CardSound
-                                            url={video.url}
-                                            thumbnail={video.thumbnail}
-                                            title={video.title}
-                                            buttonActions={
-                                                <ButtonLoading
-                                                    nameIcon="arrow"
-                                                    icon={true}
-                                                    textButton="Descargar"
-                                                    variant="contained"
-                                                    onClick={() => goto(video.url)}
-                                                />}
-                                        />
-                                    </Grid>
-                                ))}
-                            </Grid>
+                                {
+                                    data.map((items, indexs) => (
+                                        <Grid container spacing={8}
+                                            key={indexs}
+                                            sx={{
+                                                ...(indexs === 0 && { display: "grid", placeItems: "center" }),
+                                                marginTop: ".1rem"
+                                            }}
+                                        >
+                                            <Grid item xs={12} sm={6} md={4} lg={4}>
+                                                <CardSound
+                                                    url={items.url}
+                                                    thumbnail={items.thumbnail}
+                                                    title={items.title}
+                                                    buttonActions={
+                                                        <ButtonLoading
+                                                            nameIcon="arrow"
+                                                            icon={true}
+                                                            textButton="Descargar"
+                                                            variant="contained"
+                                                            onClick={() => goto(items.url)}
+                                                        />}
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    ))
+                                }
+                            </>
+                            )
+                            :
+                            (
+                                <Grid container spacing={8} >
+                                    {data.map((video, index) => (
+                                        <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                                            <CardSound
+                                                url={video.url}
+                                                thumbnail={video.thumbnail}
+                                                title={video.title}
+                                                buttonActions={
+                                                    <ButtonLoading
+                                                        nameIcon="arrow"
+                                                        icon={true}
+                                                        textButton="Descargar"
+                                                        variant="contained"
+                                                        onClick={() => goto(video.url)}
+                                                    />}
+                                            />
+                                        </Grid>
+                                    ))}
+                                </Grid>
 
-                        )
+                            )
                 }
 
 

@@ -49,7 +49,7 @@ const Downloads = () => {
                         <Grid container spacing={8} sx={{ display: "grid", placeItems: "center" }} >
 
                             {dataChoose.map((video, index) => (
-                                <Grid item xs={12} sm={5} md={5} lg={5}>
+                                <Grid key={index} item xs={12} sm={5} md={5} lg={5}>
 
                                     {isAudioDownload || isVideoDownload ?
                                         <ButtonLoading

@@ -11,8 +11,12 @@ export const globalState = createSlice({
         isAudioDownload: false,
         isVideoDownload: false,
         dataChoose: [],
+        input: ""
     },
     reducers: {
+        setInputValues: (state, action) => {
+            state.input = action.payload
+        },
         setUrl: (state, action) => {
             state.url = action.payload
         },
@@ -24,6 +28,7 @@ export const globalState = createSlice({
             state.dataChoose = []
             state.isAudioDownload = false
             state.isVideoDownload = false
+            state.input = ""
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload
@@ -44,6 +49,6 @@ export const globalState = createSlice({
     },
 });
 
-export const { setUrl, setLoading, clearData,
+export const { setInputValues, setUrl, setLoading, clearData,
     setResult, clearUrl, chooseDownload, setAudioDownload, setVideoDownload } = globalState.actions;
 export default globalState.reducer

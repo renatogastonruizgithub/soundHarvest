@@ -11,9 +11,9 @@ const Home = () => {
     }
 
     return (
-        <Box sx={{ paddingBottom: "2rem" }}>
+        <Box sx={{ paddingBottom: "2rem", display: "grid", placeItems: "center", height: "100vh" }}>
             <Container maxWidth="md"  >
-                <Grid container >
+                <Grid container  >
                     <Grid item xs={12} md={12} lg={12} >
                         <Box>
                             <div style={{ marginBottom: "2rem" }}>
