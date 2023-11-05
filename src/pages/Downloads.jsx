@@ -15,14 +15,10 @@ const Downloads = () => {
     const dispatch = useDispatch()
     function goTo() {
         dispatch(clearData())
-
-
         router("/busquedas")
-
     }
 
     function back() {
-
         router("/busquedas")
     }
 
@@ -80,7 +76,10 @@ const Downloads = () => {
                                         <p>Audio descargado</p>
 
                                     }
+                                    {isVideoDownload &&
+                                        <p>Video descargado</p>
 
+                                    }
                                     <CardSound
 
                                         url={video.url}

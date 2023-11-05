@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react'
-import axios from "axios"
+import { api, searchApi } from '../api/axiosInstance.js';
 import { useRef, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearData, setInputValues, setLoading, setResult, setUrl } from '../features/globalState/globalState';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../assets/index.css"
 
@@ -16,7 +16,6 @@ function TittleInput() {
 
 
   const delayTimer = useRef(null);
-  const api = import.meta.env.VITE_APP_API;
   const abortController = useRef(new AbortController());
 
 
@@ -52,7 +51,7 @@ function TittleInput() {
         delayTimer.current = setTimeout(() => {
           if (value.trim() !== '') {
             dispatch(setInputValues(value))
-            searchApi(value);
+            search(value);
           }
           else {
             dispatch(setInputValues(""))
@@ -82,7 +81,7 @@ function TittleInput() {
     delayTimer.current = setTimeout(() => {
       if (value.trim() !== '') {
         dispatch(setInputValues(value))
-        searchApi(value);
+        search(value);
       }
       else {
         dispatch(setInputValues(""))
@@ -93,11 +92,11 @@ function TittleInput() {
   }, []);
 
 
-  const searchApi = async (query) => {
+  const search = async (query) => {
     dispatch(setLoading(true))
     try {
       const signal = abortController.current.signal;
-      const response = await axios.post(api + "/search", { query }, { signal })
+      const response = await searchApi.post("/search", { query }, { signal })
       if (!signal.aborted) {
 
         if (response.status === 200) {
@@ -107,9 +106,6 @@ function TittleInput() {
 
         }
         else {
-          toast.error("¡Ups!, no encontrado", {
-            autoClose: 4000,
-          });
           dispatch(setLoading(false))
           dispatch(setUrl(""))
         }
@@ -117,9 +113,7 @@ function TittleInput() {
       }
 
     } catch (error) {
-
       dispatch(setLoading(false))
-
       throw new Error(error)
 
     }
@@ -129,7 +123,7 @@ function TittleInput() {
 
     try {
       dispatch(setLoading(true))
-      const response = await axios.post(api + "/sendUrl", { url })
+      const response = await searchApi.post("/checkLink", { url })
 
       if (response.status === 200) {
         dispatch(setResult([response.data]))
@@ -137,19 +131,12 @@ function TittleInput() {
         dispatch(setInputValues(""))
       }
       else {
-        toast.error("¡Ups!, link de YouTube incorrecto", {
-          autoClose: 4000,
-        });
         dispatch(setLoading(false))
         dispatch(setResult([]))
         dispatch(setInputValues(""))
       }
 
-
     } catch (error) {
-      toast.error("¡Ups!, link de YouTube incorrecto", {
-        autoClose: 4000,
-      });
       dispatch(setLoading(false))
       dispatch(setResult([]))
       dispatch(setInputValues(""))
