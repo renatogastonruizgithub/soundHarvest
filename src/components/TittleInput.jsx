@@ -105,11 +105,12 @@ function TittleInput() {
           dispatch(setUrl(""))
           dispatch(setResult(response.data))
           dispatch(setLoading(false))
-
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         else {
           dispatch(setLoading(false))
           dispatch(setUrl(""))
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
       }
