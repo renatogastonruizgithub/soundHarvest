@@ -7,11 +7,11 @@ import { toast } from 'react-toastify';
 
 const api = axios.create({
 
-    baseURL: dev
+    baseURL: production
 
 });
 const searchApi = axios.create({
-    baseURL: dev
+    baseURL: searchUrl
 });
 
 // Interceptor para manejar errores de respuesta en la API de producción
