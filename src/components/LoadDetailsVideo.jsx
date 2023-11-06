@@ -5,7 +5,7 @@ import { Container, Stack, Grid } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import CardSound from './CardSound'
 import ButtonLoading from './ButtonLoading'
-import { chooseDownload } from '../features/globalState/globalState';
+import { chooseDownload, setAudioDownload, setVideoDownload } from '../features/globalState/globalState';
 
 
 const LoadDetailsVideo = () => {
@@ -15,13 +15,15 @@ const LoadDetailsVideo = () => {
 
     function goto(url) {
 
-        console.log(url)
+
         dispatch(chooseDownload(url))
+        dispatch(setAudioDownload(false))
+        dispatch(setVideoDownload(false))
         router("/descargas")
     }
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{ marginTop: "2rem" }}>
             {!isLoading &&
                 !url &&
 

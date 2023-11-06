@@ -7,19 +7,23 @@ import ButtonsForDownload from '../components/ButtonsForDownload'
 import Spinner from '../components/Spinner'
 import { ToastContainer } from 'react-toastify'
 import ButtonLoading from '../components/ButtonLoading'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+
 import { clearData } from '../features/globalState/globalState'
 const Downloads = () => {
     const { dataChoose, isLoading, isAudioDownload, isVideoDownload } = useSelector((state) => state.global)
     const router = useNavigate();
+
     const dispatch = useDispatch()
     function goTo() {
         dispatch(clearData())
         router("/busquedas")
+
     }
 
     function back() {
         router("/busquedas")
+
     }
 
     return (

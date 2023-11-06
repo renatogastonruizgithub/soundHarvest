@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { api, searchApi } from '../api/axiosInstance.js';
 import { useRef, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,12 +11,14 @@ import "../assets/index.css"
 
 function TittleInput() {
   const dispatch = useDispatch()
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("")
+  const [isScrolled, setIsScrolled] = useState(false)
+
   const { input } = useSelector((state) => state.global)
 
 
   const delayTimer = useRef(null);
-  const abortController = useRef(new AbortController());
+  const abortController = useRef(new AbortController())
 
 
   const detectedPaste = async (event) => {
@@ -144,11 +146,32 @@ function TittleInput() {
   };
 
 
+  useEffect(() => {
+    // Manejar el evento de desplazamiento
+    const handleScroll = () => {
+      if (window.scrollY > 180) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Eliminar el event listener cuando se desmonta el componente
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [])
+
+
+
   return (
 
-    <div>
+    <div className={`navbar ${isScrolled ? 'fixed' : ''}`}>
 
       <input type="text"
+        autoComplete="off"
         value={inputValue}
         id='MyInput'
         className="MyInput"

@@ -4,6 +4,7 @@ import { Container, Grid, Box } from '@mui/material';
 import LoadDetailsVideo from '../components/LoadDetailsVideo';
 import ScrollTop from '../components/scrollTop';
 
+
 function SearchVideos() {
     return (
         <>
@@ -24,6 +25,7 @@ function SearchVideos() {
                 <LoadDetailsVideo />
             </Box >
             <ScrollTop></ScrollTop>
+
         </>
 
     )
